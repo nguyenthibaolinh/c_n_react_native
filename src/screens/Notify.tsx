@@ -4,8 +4,8 @@ import { Button, StyleSheet, Text, View } from 'react-native'
 import { useLogging } from '../hooks/useLogging'
 import { IStackScreenProps } from '../library/StackScreenProps'
 
-const PersonalScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
-  const [logging] = useLogging('Personal Screen')
+const NotifyScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
+  const [logging] = useLogging('Notify Screen')
   const { navigation } = props
 
   useEffect(() => {
@@ -14,11 +14,11 @@ const PersonalScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text>Personal Screen</Text>
+      <Text>Notify Screen</Text>
       <Button title="Home" onPress={() => navigation.navigate('Home')} />
       <Button
-        title="Categories"
-        onPress={() => navigation.navigate('Categories')}
+        title="Personal"
+        onPress={() => navigation.navigate('Personal')}
       />
       <StatusBar style="auto" />
     </View>
@@ -28,10 +28,10 @@ const PersonalScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'yellow',
+    backgroundColor: 'purple',
     alignItems: 'center',
     justifyContent: 'center',
   },
 })
 
-export default PersonalScreen
+export default NotifyScreen

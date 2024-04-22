@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useEffect } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
-import { useLogging } from '../hooks/useLogging'
-import { IStackScreenProps } from '../library/StackScreenProps'
+import { useLogging } from '../../hooks/useLogging'
+import { IStackScreenProps } from '../../library/StackScreenProps'
 
-const PersonalScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
-  const [logging] = useLogging('Personal Screen')
+const HomeScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
+  const [logging] = useLogging('Home Screen')
   const { navigation } = props
 
   useEffect(() => {
@@ -14,11 +14,14 @@ const PersonalScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text>Personal Screen</Text>
-      <Button title="Home" onPress={() => navigation.navigate('Home')} />
+      <Text>Home Screen</Text>
       <Button
         title="Categories"
         onPress={() => navigation.navigate('Categories')}
+      />
+      <Button
+        title="Personal"
+        onPress={() => navigation.navigate('Personal')}
       />
       <StatusBar style="auto" />
     </View>
@@ -28,10 +31,10 @@ const PersonalScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'yellow',
+    backgroundColor: 'cyan',
     alignItems: 'center',
     justifyContent: 'center',
   },
 })
 
-export default PersonalScreen
+export default HomeScreen
