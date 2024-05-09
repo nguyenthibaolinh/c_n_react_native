@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useEffect } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
-import { useLogging } from '../hooks/useLogging'
-import { IStackScreenProps } from '../library/StackScreenProps'
+import { useLogging } from '../../hooks/useLogging'
+import { IStackScreenProps } from '../../library/StackScreenProps'
 
 const PersonalScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
   const [logging] = useLogging('Personal Screen')

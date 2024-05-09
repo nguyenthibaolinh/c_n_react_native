@@ -25,7 +25,9 @@ import CategoriesScreen from '@/screens/Notify'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import PersonalScreen from '@/screens/Personal'
 import NotifyScreen from '@/screens/Notify'
-import { Album } from 'lucide-react-native'
+import { Bell, LucideHome, UserRound } from 'lucide-react-native'
+import SearchScreen from '@/screens/Search/Search'
+import FilterCategoriesScreen from '@/screens/FilterCategories/FilterCategories'
 
 const Stack = createStackNavigator()
 
@@ -43,11 +45,31 @@ const DARK_THEME: Theme = {
 function HomeTab() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Home" component={Home}>
-        <Album />
-      </Tab.Screen>
-      <Tab.Screen name="Notify" component={NotifyScreen} />
-      <Tab.Screen name="Personal" component={PersonalScreen} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <LucideHome color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Notify"
+        component={NotifyScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => <Bell color={color} size={size} />,
+        }}
+      />
+      <Tab.Screen
+        name="Personal"
+        component={PersonalScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <UserRound color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   )
 }
@@ -108,6 +130,12 @@ export default function App() {
             <Stack.Screen
               name="HomeTab"
               component={HomeTab}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Search" component={SearchScreen} />
+            <Stack.Screen
+              name="FilterCategories"
+              component={FilterCategoriesScreen}
               options={{ headerShown: false }}
             />
             {/* <Stack.Screen
