@@ -16,7 +16,7 @@ import {
 import { updateStoryFilter } from '@/features/stories/storyFilterSlide'
 import AuthorServices, { AuthorKey } from '@/services/authorServices'
 import { AuthorResponse } from '@/types/authorType'
-import { cn } from '@/utils/utils'
+import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import { CheckIcon, ChevronsUpDown } from 'lucide-react-native'
 import { FC, memo } from 'react'
