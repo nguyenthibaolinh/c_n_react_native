@@ -24,6 +24,12 @@ const StoryServices = {
     })
   },
 
+  follow: async (options: any) => {
+    return http.get(PREV_URL + '/follow', {
+      params: options,
+    })
+  },
+
   get: async (slug: string, id: string) => {
     return http.get(PREV_URL + `/${slug}.-.${id}`)
   },

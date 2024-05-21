@@ -16,12 +16,7 @@ import { ListFilter, Search } from 'lucide-react-native'
 import StoriesList from '@/components/StoriesList'
 
 const HomeScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
-  const [logging] = useLogging('Home Screen')
   const { navigation } = props
-
-  useEffect(() => {
-    logging.info({ navigation })
-  }, [logging])
 
   return (
     <View className="flex-1 ">
@@ -35,18 +30,9 @@ const HomeScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
           <Search color="black" size={30} />
         </TouchableOpacity>
       </View>
-      <StoriesList />
+      <StoriesList navigation={navigation} />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'cyan',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
 
 export default HomeScreen

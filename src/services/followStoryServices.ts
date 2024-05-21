@@ -4,10 +4,10 @@ const PREV_URL = '/follow-stories'
 export const FollowStoryKey = 'follow_stories'
 
 const FollowStoryServices = {
-  get: (storyId: number) => {
+  get: (storyId: string) => {
     return http.get(`${PREV_URL}/${storyId}`)
   },
-  update: (storyId: number) => {
+  update: (storyId: string) => {
     return http.put(`${PREV_URL}/${storyId}`)
   },
 }

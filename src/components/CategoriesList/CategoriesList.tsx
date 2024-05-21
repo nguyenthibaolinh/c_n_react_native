@@ -12,9 +12,9 @@ const CategoriesList: React.FunctionComponent<FilterCategoriesProps> = ({
   categories,
   navigation,
 }) => {
-  useEffect(() => {
-    console.log('Categories:', categories)
-  }, [categories]) // Log lại mỗi khi categories thay đổi
+  // useEffect(() => {
+  //   console.log('Categories:', categories)
+  // }, [categories]) // Log lại mỗi khi categories thay đổi
 
   if (!categories) {
     return null // Trả về null nếu categories không tồn tại

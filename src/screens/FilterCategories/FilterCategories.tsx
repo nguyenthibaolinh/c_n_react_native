@@ -1,3 +1,4 @@
+import StoryFilterBox from '@/components/HomePage/StoryFilterBox'
 import React, { useState } from 'react'
 import { View, TextInput, Button, FlatList, Text } from 'react-native'
 
@@ -32,6 +33,7 @@ const FilterCategoriesScreen = () => {
         renderItem={({ item }) => <Text>{item}</Text>}
         keyExtractor={(item, index) => index.toString()}
       />
+      <StoryFilterBox />
     </View>
   )
 }

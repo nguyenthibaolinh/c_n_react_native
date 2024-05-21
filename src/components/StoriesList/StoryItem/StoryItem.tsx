@@ -12,30 +12,37 @@ import {
 } from 'react-native'
 import { ListFilter, Search } from 'lucide-react-native'
 import { IStackScreenProps } from '@/library/StackScreenProps'
+import { StoriesResponse } from '@/types/storyType'
 
 interface IStoryItemProps {
-  storyItem: {
-    image: string
-    name: string
-    chapterEnd: string
-  }
+  story: StoriesResponse
+  navigation: any
 }
 
-const StoryItem: React.FunctionComponent<IStoryItemProps> = (props) => {
-  let { image, name, chapterEnd } = props.storyItem
-
+const StoryItem: React.FunctionComponent<IStoryItemProps> = ({
+  story,
+  navigation,
+}) => {
   return (
-    <View className="bg-red-600 h-[14%] w-[100%] flex-row items-center">
-      <Image
-        className="w-[80px] h-[80px] rounded-[50] ml-2"
-        source={{ uri: image }}
-        resizeMode="stretch"
-      />
-      <View className="bg-green-500 w-[70%] h-[85%] ml-2">
-        <Text className="text-[20px] font-bold">{name}</Text>
-        <Text className="text-[20px] ">{chapterEnd}</Text>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('Story', { storyId: story.id, slug: story.slug })
+      }
+    >
+      <View className="h-[65px] w-[100%] flex-row items-center bg-white">
+        <Image
+          className="w-[50px] h-[50px] rounded-[50] ml-2"
+          source={{ uri: story.avatar ? JSON.parse(story.avatar).url : '' }}
+          resizeMode="stretch"
+        />
+        <View className="w-[76%] h-[60px] ml-2">
+          <Text className="text-[20px] font-bold">{story.name}</Text>
+          <Text className="text-[16px] ">
+            Chương {story.lastChapter?.number}
+          </Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

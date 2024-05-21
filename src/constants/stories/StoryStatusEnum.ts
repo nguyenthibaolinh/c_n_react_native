@@ -3,8 +3,8 @@ const StoryStatusEnum = {
   COMPLETED: true,
   allNames(): { [key: string]: string } {
     return {
-      [`${StoryStatusEnum.ONGOING}`]: 'cms:stories.status.ongoing',
-      [`${StoryStatusEnum.COMPLETED}`]: 'cms:stories.status.completed',
+      [`${StoryStatusEnum.ONGOING}`]: 'Đang cập nhật',
+      [`${StoryStatusEnum.COMPLETED}`]: 'Hoàn thành',
     }
   },
 

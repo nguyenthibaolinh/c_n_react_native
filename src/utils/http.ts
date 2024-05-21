@@ -4,15 +4,15 @@ import { getTokenLS, setTokenLS } from './authLS'
 import { sendEvent } from './event'
 import { Toast } from 'toastify-react-native'
 
-const BASE_URL = 'https://webtruyenorm.onrender.com/v1'
+const BASE_URL = 'https://1a69-115-76-54-12.ngrok-free.app/v1'
 
 const http = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
 })
 
-http.interceptors.request.use((request) => {
-  const accessToken = getTokenLS()
+http.interceptors.request.use(async (request) => {
+  const accessToken = await getTokenLS()
 
   if (!request.headers['Content-Type']) {
     request.headers['Content-Type'] = 'application/json'

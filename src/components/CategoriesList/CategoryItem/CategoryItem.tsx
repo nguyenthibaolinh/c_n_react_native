@@ -33,11 +33,10 @@ const CategoryItem: React.FunctionComponent<CategoryItemProps> = ({
   }
 
   return (
-    <TouchableOpacity
-      className="border border-primary rounded-md px-2 py-0.5"
-      onPress={handleClick}
-    >
-      <Text className="text-blue-600 text-[16px]">{category.name}</Text>
+    <TouchableOpacity onPress={handleClick}>
+      <Text className="border-gray-200 bg-gray-200 rounded-[20] justify-between p-2 pl-4 pr-4 mb-1 text-[16px]">
+        {category.name}
+      </Text>
     </TouchableOpacity>
   )
 }

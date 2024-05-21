@@ -57,13 +57,18 @@ export interface StoriesQuery {
   page: number
   perPage?: number
   type?: number
-  isFull: boolean | null
+  isFull?: boolean
   categoryIn: string
   categoryNotIn: string
   authorId?: number
   userId?: number
   order?: string
   key: string
+}
+
+export interface FollowStoriesQuery {
+  page?: number
+  perPage?: number
 }
 
 export interface StoryCreate {

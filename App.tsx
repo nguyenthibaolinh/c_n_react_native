@@ -28,6 +28,10 @@ import NotifyScreen from '@/screens/Notify'
 import { Bell, LucideHome, UserRound } from 'lucide-react-native'
 import SearchScreen from '@/screens/Search/Search'
 import FilterCategoriesScreen from '@/screens/FilterCategories/FilterCategories'
+import { Provider } from 'react-redux'
+import { store } from '@/app/store'
+import ChapterListScreen from '@/screens/ChapterList/ChapterList'
+import StoryScreen from '@/screens/Story/Story'
 
 const Stack = createStackNavigator()
 
@@ -115,47 +119,59 @@ export default function App() {
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       {/* Provide the client to your App */}
       <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            {/* <Stack.Screen
+        <Provider store={store}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              {/* <Stack.Screen
               name="Intro"
               component={IntroScreen}
               options={{ title: 'Intro' }}
             /> */}
-            <Stack.Screen
-              name="SignIn"
-              component={SignInScreen}
-              options={{ title: 'Đăng nhập' }}
-            />
-            <Stack.Screen
-              name="HomeTab"
-              component={HomeTab}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="Search" component={SearchScreen} />
-            <Stack.Screen
-              name="FilterCategories"
-              component={FilterCategoriesScreen}
-              options={{ headerShown: false }}
-            />
-            {/* <Stack.Screen
+              <Stack.Screen
+                name="SignIn"
+                component={SignInScreen}
+                options={{ title: 'Đăng nhập' }}
+              />
+              <Stack.Screen
+                name="HomeTab"
+                component={HomeTab}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen name="Search" component={SearchScreen} />
+              <Stack.Screen
+                name="FilterCategories"
+                component={FilterCategoriesScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Story"
+                component={StoryScreen}
+                options={{ title: 'Chi tiết truyện' }}
+              />
+              <Stack.Screen
+                name="ChapterList"
+                component={ChapterListScreen}
+                options={{ title: 'Danh sách chương' }}
+              />
+              {/* <Stack.Screen
               name="Categories"
               component={CategoriesScreen}
               options={{ title: 'Categories' }}
             /> */}
-            {/* <Stack.Screen
+              {/* <Stack.Screen
               name="SignUp"
               component={SignUpScreen}
               options={{ title: 'Đăng ký' }}
             /> */}
-            {/* <Stack.Screen
+              {/* <Stack.Screen
               name="ActiveAccount"
               component={ActiveAccountScreen}
               options={{ title: 'Active Account' }}
             /> */}
-          </Stack.Navigator>
-        </NavigationContainer>
-        <ToastManager />
+            </Stack.Navigator>
+          </NavigationContainer>
+          <ToastManager />
+        </Provider>
       </QueryClientProvider>
     </ThemeProvider>
   )
