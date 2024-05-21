@@ -84,17 +84,27 @@ const ChapterListScreen: React.FunctionComponent<IChapterListScreenProps> = ({
       >
         {isSuccess &&
           chapters.map((chapter) => (
-            <View className="flex-row border-b-[1px] pb-[5px] pt-2 justify-between">
-              <Text className="text-[18px]">
-                {chapter.number} - {chapter.name}
-              </Text>
-              {!chapter.isFree && (
-                <View className="flex-row gap-1 items-center">
-                  <CircleDollarSign color="black" size={20} />
-                  <Text className="text-[18px]">{chapter.price}</Text>
-                </View>
-              )}
-            </View>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('Chapter', {
+                  storyId: storyId,
+                  slug: storySlug,
+                  chapterId: chapter.id,
+                })
+              }
+            >
+              <View className="flex-row border-b-[1px] pb-[5px] pt-2 justify-between">
+                <Text className="text-[18px]">
+                  {chapter.number} - {chapter.name}
+                </Text>
+                {!chapter.isFree && (
+                  <View className="flex-row gap-1 items-center">
+                    <CircleDollarSign color="black" size={20} />
+                    <Text className="text-[18px]">{chapter.price}</Text>
+                  </View>
+                )}
+              </View>
+            </TouchableOpacity>
           ))}
       </ScrollView>
     </View>

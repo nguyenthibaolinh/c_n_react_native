@@ -18,7 +18,7 @@ const PersonalScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
 
   return (
     <View className="flex-1 ">
-      <StoryListBox navigation={navigation} />
+      {/* <StoryListBox navigation={navigation} /> */}
     </View>
   )
 }

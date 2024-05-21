@@ -4,7 +4,7 @@ import { getTokenLS, setTokenLS } from './authLS'
 import { sendEvent } from './event'
 import { Toast } from 'toastify-react-native'
 
-const BASE_URL = 'https://1a69-115-76-54-12.ngrok-free.app/v1'
+const BASE_URL = 'https://5eff-115-76-54-12.ngrok-free.app/v1'
 
 const http = axios.create({
   baseURL: BASE_URL,

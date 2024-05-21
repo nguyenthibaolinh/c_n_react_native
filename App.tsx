@@ -32,6 +32,7 @@ import { Provider } from 'react-redux'
 import { store } from '@/app/store'
 import ChapterListScreen from '@/screens/ChapterList/ChapterList'
 import StoryScreen from '@/screens/Story/Story'
+import ChapterScreen from '@/screens/Chapter/Chapter'
 
 const Stack = createStackNavigator()
 
@@ -152,6 +153,11 @@ export default function App() {
                 name="ChapterList"
                 component={ChapterListScreen}
                 options={{ title: 'Danh sách chương' }}
+              />
+              <Stack.Screen
+                name="Chapter"
+                component={ChapterScreen}
+                options={{ title: 'chương' }}
               />
               {/* <Stack.Screen
               name="Categories"

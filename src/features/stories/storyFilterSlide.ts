@@ -9,6 +9,7 @@ const initialState: StoriesQuery = {
   page: 1,
   type: StoryTypeEnum.WORD,
   key: '',
+  isFull: null,
   order: 'update',
   categoryIn: '',
   categoryNotIn: '',

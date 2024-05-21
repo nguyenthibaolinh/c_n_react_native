@@ -20,6 +20,7 @@ import LikeStoryServices, { LikeStoryKey } from '@/services/likeStoryServices'
 import FollowStoryServices, {
   FollowStoryKey,
 } from '@/services/followStoryServices'
+import { alertErrorAxios } from '@/utils/alert'
 
 interface StoryRouteParams {
   storyId: string
@@ -98,8 +99,7 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
         queryKey: [LikeStoryKey, storyId],
       })
     } catch (error) {
-      Alert.alert('Error', 'Có lỗi xảy ra khi thích truyện.')
-      // alertErrorAxios(error)
+      alertErrorAxios(error)
     }
   }
 
@@ -115,8 +115,7 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
         queryKey: [StoryKey, 'follow'],
       })
     } catch (error) {
-      Alert.alert('Error', 'Có lỗi xảy ra khi theo dõi truyện.')
-      // alertErrorAxios(error, t)
+      alertErrorAxios(error)
     }
   }
 
@@ -132,11 +131,13 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
             <View className="flex-row">
               <Image
                 className="w-[100px] h-[140px] rounded-[10] ml-1 mr-2 mt-3"
-                source={{ uri: story.avatar }}
+                source={{
+                  uri: story.avatar ? JSON.parse(story.avatar).url : '',
+                }}
                 resizeMode="stretch"
               />
               <View className="flex-1">
-                <Text className="text-[24px] font-bold mb-3">{story.name}</Text>
+                <Text className="text-[22px] font-bold mb-1">{story.name}</Text>
                 <Text className="text-[15px]">
                   Loại: {StoryTypeEnum.getNameByValue(story.type)}
                 </Text>
@@ -158,7 +159,11 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
                     className="w-[30px] h-[30px] rounded-[50] mt-1"
                     source={
                       story.User.avatar
-                        ? { uri: story.User.avatar }
+                        ? {
+                            uri: story.User.avatar
+                              ? JSON.parse(story.User.avatar).url
+                              : '',
+                          }
                         : require('../../image/defaultpic.png')
                     }
                     resizeMode="stretch"

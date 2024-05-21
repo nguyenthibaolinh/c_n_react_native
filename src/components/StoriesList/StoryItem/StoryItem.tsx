@@ -36,7 +36,13 @@ const StoryItem: React.FunctionComponent<IStoryItemProps> = ({
           resizeMode="stretch"
         />
         <View className="w-[76%] h-[60px] ml-2">
-          <Text className="text-[20px] font-bold">{story.name}</Text>
+          <Text
+            className="text-[19px] font-bold"
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {story.name}
+          </Text>
           <Text className="text-[16px] ">
             Chương {story.lastChapter?.number}
           </Text>
