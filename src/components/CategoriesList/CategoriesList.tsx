@@ -21,7 +21,7 @@ const CategoriesList: React.FunctionComponent<FilterCategoriesProps> = ({
   }
 
   return (
-    <View className="flex flex-wrap gap-2">
+    <View className="flex-row flex-wrap gap-2">
       {categories.map((category) => (
         <CategoryItem
           key={category.id}

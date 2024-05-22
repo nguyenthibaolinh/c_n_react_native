@@ -63,26 +63,31 @@ const HomeScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
         </TouchableOpacity>
       </View>
       <View className="flex-row">
-        {Object.keys(STORY_TYPE).map((storyTypeKey) => (
-          <Button
-            className="border-orange-500 bg-orange-500 w-[50%] h-[40px]"
-            key={storyTypeKey}
-            variant={
-              STORY_TYPE[storyTypeKey as StoryTypeKey] === storyFilter.type
-                ? 'outline'
-                : 'default'
-            }
-            onPress={() => {
-              handleChangeStoryType(storyTypeKey as StoryTypeKey)
-            }}
-          >
-            <Text>
-              {StoryTypeEnum.getNameByValue(
-                STORY_TYPE[storyTypeKey as StoryTypeKey]
-              )}
-            </Text>
-          </Button>
-        ))}
+        {Object.keys(STORY_TYPE).map((storyTypeKey) => {
+          const isSelected =
+            STORY_TYPE[storyTypeKey as StoryTypeKey] === storyFilter.type
+          return (
+            <View
+              className="w-[50%] h-[40px] justify-center items-center border border-orange-400"
+              style={{
+                backgroundColor: isSelected ? '#FFA500' : '#FFCC99',
+              }}
+            >
+              <TouchableOpacity
+                key={storyTypeKey}
+                onPress={() =>
+                  handleChangeStoryType(storyTypeKey as StoryTypeKey)
+                }
+              >
+                <Text className="">
+                  {StoryTypeEnum.getNameByValue(
+                    STORY_TYPE[storyTypeKey as StoryTypeKey]
+                  )}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )
+        })}
       </View>
       <StoriesList navigation={navigation} />
     </View>

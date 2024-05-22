@@ -9,12 +9,22 @@ import ChapterServices, { ChapterKey } from '@/services/chapterServices'
 import { ChapterResponse } from '@/types/chapterType'
 import { useQuery } from '@tanstack/react-query'
 import { isAxiosError } from 'axios'
-import { View, Text } from 'react-native'
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import React from 'react'
+import { View, Text, TouchableOpacity, BackHandler } from 'react-native'
+import {
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native'
+import React, { useEffect, useState } from 'react'
+import ChapterNavigation from '@/components/ChapterNavigation'
+import { ArrowLeft, ArrowRight } from 'lucide-react-native'
+import Story from '../Story'
 
 interface ChapterRouteParams {
   chapterId: string
+  storySlug: string
+  storyId: string
 }
 
 type ChapterProps = {
@@ -26,10 +36,7 @@ const ChapterScreen: React.FunctionComponent<ChapterProps> = ({
   route,
   navigation,
 }) => {
-  // const navigation = useNavigation()
-  // const route = useRoute()
-  const { chapterId } = route.params
-  // const [_, chapterId] = chapterIdString.split('-')
+  const { storySlug, storyId, chapterId } = route.params
 
   const {
     data: chapterResponse,
@@ -42,8 +49,6 @@ const ChapterScreen: React.FunctionComponent<ChapterProps> = ({
       return ChapterServices.get(chapterId)
     },
   })
-
-  console.log(chapterId)
 
   const authSelector = useAppSelector(selectAuth)
 
@@ -78,6 +83,7 @@ const ChapterScreen: React.FunctionComponent<ChapterProps> = ({
               <ChapterContentImage content={chapter.content} />
             )}
           </View>
+          <ChapterNavigation />
         </>
       )}
     </View>

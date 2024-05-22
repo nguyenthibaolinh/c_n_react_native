@@ -22,7 +22,7 @@ const ChapterContentImage: FC<ChapterContentImageProp> = ({ content }) => {
         <Image
           key={image.index}
           source={{ uri: image.url }}
-          className="w-[100%] h-[200px]"
+          className="w-auto max-w-full min-h-10"
         />
       ))}
     </ScrollView>

@@ -7,6 +7,7 @@ import {
   Alert,
   ScrollView,
   RefreshControl,
+  useWindowDimensions,
 } from 'react-native'
 import { ListOrdered } from 'lucide-react-native'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -21,6 +22,7 @@ import FollowStoryServices, {
   FollowStoryKey,
 } from '@/services/followStoryServices'
 import { alertErrorAxios } from '@/utils/alert'
+import RenderHTML from 'react-native-render-html'
 
 interface StoryRouteParams {
   storyId: string
@@ -37,6 +39,7 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
   route,
 }) => {
   const { slug, storyId } = route.params
+  const { width } = useWindowDimensions()
 
   const {
     data: storyResponse,
@@ -218,7 +221,10 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
               </View>
             </View>
             <View className="w-[100%] h-[1px] bg-black"></View>
-            <Text className="text-[16px]">{story.descriptions}</Text>
+            <RenderHTML
+              contentWidth={width}
+              source={{ html: story.descriptions }}
+            />
           </>
         )}
       </ScrollView>
