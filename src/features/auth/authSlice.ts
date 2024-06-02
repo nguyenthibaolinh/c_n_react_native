@@ -12,7 +12,7 @@ type AuthState = {
 
 // Define the initial state using that type
 const initialState: AuthState = {
-  isInitialized: false,
+  isInitialized: true,
   isAuthenticated: false,
   user: {
     id: 0,

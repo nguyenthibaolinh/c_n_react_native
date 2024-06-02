@@ -52,11 +52,10 @@ const ChapterListScreen: React.FunctionComponent<IChapterListScreenProps> = ({
       })
     },
   })
-  // console.log(storySlug)
-  const chapters: ChaptersResponse[] = chaptersResponse?.data
-  // console.log(chapters)
-  //---------------refresh---------------
 
+  const chapters: ChaptersResponse[] = chaptersResponse?.data
+
+  //---------------refresh---------------
   const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
@@ -88,7 +87,7 @@ const ChapterListScreen: React.FunctionComponent<IChapterListScreenProps> = ({
               onPress={() =>
                 navigation.navigate('Chapter', {
                   storyId: storyId,
-                  slug: storySlug,
+                  storySlug: storySlug,
                   chapterId: chapter.id,
                 })
               }

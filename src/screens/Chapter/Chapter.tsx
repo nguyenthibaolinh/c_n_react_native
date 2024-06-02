@@ -73,9 +73,8 @@ const ChapterScreen: React.FunctionComponent<ChapterProps> = ({
   return (
     <View>
       {isSuccess && (
-        <>
-          {/* <ChapterNavigation chapter={chapter} /> */}
-          <View>
+        <View className="h-full">
+          <View className="flex-1 bg-white">
             {chapter.type === StoryTypeEnum.WORD && (
               <ChapterContentText content={chapter.content} />
             )}
@@ -83,8 +82,13 @@ const ChapterScreen: React.FunctionComponent<ChapterProps> = ({
               <ChapterContentImage content={chapter.content} />
             )}
           </View>
-          <ChapterNavigation />
-        </>
+          <ChapterNavigation
+            storyId={storyId}
+            storySlug={storySlug}
+            chapter={chapter}
+            navigation={navigation}
+          />
+        </View>
       )}
     </View>
   )

@@ -1,3 +1,4 @@
+import { ChapterResponse } from '@/types/chapterType'
 import React from 'react'
 import { View, Text, useWindowDimensions } from 'react-native'
 import RenderHTML from 'react-native-render-html'

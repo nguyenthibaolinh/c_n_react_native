@@ -57,7 +57,7 @@ export interface StoriesQuery {
   page: number
   perPage?: number
   type?: number
-  isFull: boolean | null
+  isFull?: boolean | null
   categoryIn: string
   categoryNotIn: string
   authorId?: number

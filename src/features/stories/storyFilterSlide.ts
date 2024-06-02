@@ -7,9 +7,10 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 // Define the initial state using that type
 const initialState: StoriesQuery = {
   page: 1,
+  perPage: 11,
   type: StoryTypeEnum.WORD,
   key: '',
-  isFull: null,
+  // isFull: undefined,
   order: 'update',
   categoryIn: '',
   categoryNotIn: '',

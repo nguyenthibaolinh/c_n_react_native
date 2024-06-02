@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { View, Image, ScrollView } from 'react-native'
+import { View, Image, ScrollView, FlatList, Dimensions } from 'react-native'
 import { ChapterImageUploadResponse } from '@/types/fileUploadType'
 
 type ChapterContentImageProp = {
@@ -8,7 +8,8 @@ type ChapterContentImageProp = {
 
 const ChapterContentImage: FC<ChapterContentImageProp> = ({ content }) => {
   const [imagesList, setImagesList] = useState<ChapterImageUploadResponse[]>([])
-
+  const win = Dimensions.get('window')
+  const ratio = win.width / 541
   useEffect(() => {
     const imagesParse: ChapterImageUploadResponse[] = JSON.parse(content)
     imagesParse.sort((image1, image2) => image1.index - image2.index)
@@ -17,15 +18,17 @@ const ChapterContentImage: FC<ChapterContentImageProp> = ({ content }) => {
   }, [content])
 
   return (
-    <ScrollView>
-      {imagesList.map((image) => (
+    <FlatList
+      data={imagesList}
+      renderItem={({ item }) => (
         <Image
-          key={image.index}
-          source={{ uri: image.url }}
-          className="w-auto max-w-full min-h-10"
+          src={item.url}
+          className="flex-1 w-full h-[600px]"
+          style={{ resizeMode: 'stretch' }}
         />
-      ))}
-    </ScrollView>
+      )}
+      keyExtractor={(item) => item.index.toString()}
+    ></FlatList>
   )
 }
 

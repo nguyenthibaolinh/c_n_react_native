@@ -4,22 +4,21 @@ import {
   ThemeProvider,
 } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'react-native-gesture-handler'
-// import IntroScreen from '@/screens/Intro'
 import { useLogging } from '@/hooks/useLogging'
 import SignInScreen from '@/screens/SignIn'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import queryClient from '@/config/reactQuery'
 import ToastManager from 'toastify-react-native'
 
-// Import your global CSS file
 import './global.css'
-// import SignUpScreen from '@/screens/SignUp'
 import { NAV_THEME } from '@/lib/constants'
 import { useColorScheme } from '@/lib/useColorScheme'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Platform } from 'react-native'
+import AsyncStorage, {
+  useAsyncStorage,
+} from '@react-native-async-storage/async-storage'
+import { Platform, StatusBar } from 'react-native'
 import Home from '@/screens/Home'
 import CategoriesScreen from '@/screens/Notify'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -33,10 +32,11 @@ import { store } from '@/app/store'
 import ChapterListScreen from '@/screens/ChapterList/ChapterList'
 import StoryScreen from '@/screens/Story/Story'
 import ChapterScreen from '@/screens/Chapter/Chapter'
+import AuthNavigator from '@/navigators/AuthNavigator'
+import MainNavigator from '@/navigators/MainNavigator'
+import AppRouters from '@/navigators/AppRouters'
 
 const Stack = createStackNavigator()
-
-const Tab = createBottomTabNavigator()
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -47,46 +47,12 @@ const DARK_THEME: Theme = {
   colors: NAV_THEME.dark,
 }
 
-function HomeTab() {
-  return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <LucideHome color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Notify"
-        component={NotifyScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => <Bell color={color} size={size} />,
-        }}
-      />
-      <Tab.Screen
-        name="Personal"
-        component={PersonalScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <UserRound color={color} size={size} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  )
-}
-
 export default function App() {
-  const [logging] = useLogging('Application')
+  // const [accessToken, setAccessToken] = useState('')
+  // const { getItem, setItem } = useAsyncStorage('assetToken')
+
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme()
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false)
-
-  useEffect(() => {
-    logging.info('Loading application.')
-  }, [logging])
 
   useEffect(() => {
     ;(async () => {
@@ -116,98 +82,21 @@ export default function App() {
   }
 
   return (
-    //
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      {/* Provide the client to your App */}
       <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <NavigationContainer>
-            <Stack.Navigator>
-              {/* <Stack.Screen
-              name="Intro"
-              component={IntroScreen}
-              options={{ title: 'Intro' }}
-            /> */}
-              <Stack.Screen
-                name="SignIn"
-                component={SignInScreen}
-                options={{ title: 'Đăng nhập' }}
-              />
-              <Stack.Screen
-                name="HomeTab"
-                component={HomeTab}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen name="Search" component={SearchScreen} />
-              <Stack.Screen
-                name="FilterCategories"
-                component={FilterCategoriesScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Story"
-                component={StoryScreen}
-                options={{ title: 'Chi tiết truyện' }}
-              />
-              <Stack.Screen
-                name="ChapterList"
-                component={ChapterListScreen}
-                options={{ title: 'Danh sách chương' }}
-              />
-              <Stack.Screen
-                name="Chapter"
-                component={ChapterScreen}
-                options={{ title: 'chương' }}
-              />
-              {/* <Stack.Screen
-              name="Categories"
-              component={CategoriesScreen}
-              options={{ title: 'Categories' }}
-            /> */}
-              {/* <Stack.Screen
-              name="SignUp"
-              component={SignUpScreen}
-              options={{ title: 'Đăng ký' }}
-            /> */}
-              {/* <Stack.Screen
-              name="ActiveAccount"
-              component={ActiveAccountScreen}
-              options={{ title: 'Active Account' }}
-            /> */}
-            </Stack.Navigator>
-          </NavigationContainer>
-          <ToastManager />
-        </Provider>
+        <>
+          <Provider store={store}>
+            <StatusBar
+              barStyle="dark-content"
+              backgroundColor="transparent"
+              // translucent
+            />
+            <NavigationContainer>
+              <AppRouters />
+            </NavigationContainer>
+          </Provider>
+        </>
       </QueryClientProvider>
     </ThemeProvider>
   )
 }
-
-// import { StatusBar } from 'expo-status-bar';
-// import { StyleSheet, Text, View } from 'react-native';
-// import React, { useEffect } from 'react';
-// import { useLogging } from './src/hooks/useLogging';
-
-// export default function App() {
-//   const [logging] = useLogging('Application');
-
-//     useEffect(() => {
-//         logging.info('Loading application.');
-//     }, [logging]);
-
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.tsx to start working on your con chim</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });

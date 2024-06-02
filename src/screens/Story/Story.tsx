@@ -98,7 +98,11 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
     try {
       await likeStoryMutation.mutateAsync()
 
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
+        queryKey: [StoryKey, 'get', storyId],
+      })
+
+      queryClient.refetchQueries({
         queryKey: [LikeStoryKey, storyId],
       })
     } catch (error) {
@@ -110,7 +114,11 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
     try {
       await followStoryMutation.mutateAsync()
 
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
+        queryKey: [StoryKey, 'get', storyId],
+      })
+
+      queryClient.refetchQueries({
         queryKey: [FollowStoryKey, storyId],
       })
 
@@ -188,11 +196,6 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
               <TouchableOpacity onPress={handleLikeStory}>
                 <Text className="border-orange-500 bg-orange-500 rounded-[20] justify-between p-2 pl-4 pr-4 text-[16px] text-white">
                   {likeStoryResponse?.data === null ? 'Thích' : 'Bỏ thích'}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                <Text className="border-orange-500 bg-orange-500 rounded-[20] justify-between p-2 pl-4 pr-4 text-[16px] text-white">
-                  Đọc truyện
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={handleFollowStory}>
