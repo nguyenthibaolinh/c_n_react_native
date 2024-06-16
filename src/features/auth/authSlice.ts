@@ -12,7 +12,7 @@ type AuthState = {
 
 // Define the initial state using that type
 const initialState: AuthState = {
-  isInitialized: true,
+  isInitialized: false,
   isAuthenticated: false,
   user: {
     id: 0,
@@ -42,7 +42,10 @@ export const authSlice = createSlice({
       state.user = payload.user
     },
     resetAuth: () => {
-      return initialState
+      return {
+        ...initialState,
+        isInitialized: true,
+      }
     },
     initAuth: (state) => {
       state.isInitialized = true

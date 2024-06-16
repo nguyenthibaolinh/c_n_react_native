@@ -66,14 +66,10 @@ const ChapterListScreen: React.FunctionComponent<IChapterListScreenProps> = ({
     return unsubscribe
   }, [navigation, refetch])
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = () => {
     setRefreshing(true)
-    // Thực hiện các thao tác cần thiết để làm mới dữ liệu
-    refetch()
-      .then(() => setRefreshing(false))
-      .catch(() => setRefreshing(false))
-  }, [refetch])
-
+    setRefreshing(false)
+  }
   return (
     <View className="h-[100%] w-[100%] p-3 pt-1 gap-2 bg-white">
       <ScrollView
@@ -84,6 +80,7 @@ const ChapterListScreen: React.FunctionComponent<IChapterListScreenProps> = ({
         {isSuccess &&
           chapters.map((chapter) => (
             <TouchableOpacity
+              key={chapter.id}
               onPress={() =>
                 navigation.navigate('Chapter', {
                   storyId: storyId,

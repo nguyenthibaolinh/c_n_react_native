@@ -22,7 +22,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Notify"
-        component={NotifyScreen}
+        component={PersonalScreen}
         options={{
           tabBarIcon: ({ color, size }) => <Bell color={color} size={size} />,
         }}

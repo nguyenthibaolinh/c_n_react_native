@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, Text } from 'react-native'
 import { ArrowLeft, ArrowRight } from 'lucide-react-native'
 import { IStackScreenProps } from '@/library/StackScreenProps'
 import { useQuery } from '@tanstack/react-query'
@@ -22,6 +22,7 @@ const ChapterNavigation: React.FunctionComponent<ChapterNavigationProp> = ({
 }) => {
   const [prevChapter, setPrevChapter] = useState<ChaptersResponse>()
   const [nextChapter, setNextChapter] = useState<ChaptersResponse>()
+  const [currChapter, setCurrChapter] = useState<ChaptersResponse>()
 
   const chaptersQuery = useQuery({
     queryKey: [ChapterKey, storySlug, Number(storyId), ChapterSortEnum.FIRST],
@@ -33,14 +34,6 @@ const ChapterNavigation: React.FunctionComponent<ChapterNavigationProp> = ({
       })
     },
   })
-  console.log(
-    {
-      storySlug: storySlug,
-      storyId: storyId,
-      order: ChapterSortEnum.FIRST,
-    },
-    chaptersQuery.data
-  )
 
   const chapters: ChaptersResponse[] = chaptersQuery.data?.data
 
@@ -49,11 +42,10 @@ const ChapterNavigation: React.FunctionComponent<ChapterNavigationProp> = ({
       const currentIndex = chapters.findIndex(
         (chapterItem) => chapterItem.id === chapter.id
       )
+      setCurrChapter(chapters[currentIndex])
+      setPrevChapter(chapters[currentIndex - 1])
 
-      setPrevChapter(chapters[currentIndex + 1])
-
-      setNextChapter(chapters[currentIndex - 1])
-      console.log(chapters)
+      setNextChapter(chapters[currentIndex + 1])
     }
   }, [chaptersQuery])
 
@@ -75,6 +67,9 @@ const ChapterNavigation: React.FunctionComponent<ChapterNavigationProp> = ({
       ) : (
         <ArrowLeft size={24} color="gray" />
       )}
+
+      <Text>Chương {currChapter?.number}</Text>
+
       {nextChapter ? (
         <TouchableOpacity
           onPress={() => {

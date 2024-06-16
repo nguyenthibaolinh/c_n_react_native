@@ -1,39 +1,55 @@
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import StoryFilterBox from '@/components/HomePage/StoryFilterBox'
-import React, { useState } from 'react'
-import { View, TextInput, Button, FlatList, Text } from 'react-native'
+import {
+  selectStoryFilter,
+  updateStoryFilter,
+} from '@/features/stories/storyFilterSlide'
+import { IStackScreenProps } from '@/library/StackScreenProps'
+import { Home } from 'lucide-react-native'
+import React, { useEffect, useState } from 'react'
+import { View, TextInput, FlatList, Text } from 'react-native'
+import { Button } from 'react-native-paper'
 
-const FilterCategoriesScreen = () => {
-  const [searchText, setSearchText] = useState('')
-  const [searchResults, setSearchResults] = useState<string[]>([])
+const FilterCategoriesScreen: React.FunctionComponent<IStackScreenProps> = ({
+  navigation,
+}) => {
+  const storyFilter = useAppSelector(selectStoryFilter)
+  const [searchText, setSearchText] = useState(storyFilter.key)
+  const dispatch = useAppDispatch()
 
-  // Function to handle search
   const handleSearch = () => {
-    // Perform search logic here, for now, let's just simulate some results
-    const results = ['Result 1', 'Result 2', 'Result 3']
-    setSearchResults(results)
+    dispatch(
+      updateStoryFilter({
+        key: searchText,
+      })
+    )
+    navigation.navigate('Home')
   }
 
   return (
-    <View style={{ flex: 1, padding: 20 }}>
+    <View className="flex-1 p-[20px] bg-white items-center">
       <TextInput
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1,
-          marginBottom: 10,
-          paddingHorizontal: 10,
-        }}
-        placeholder="Enter search text"
+        className="h-[40px] w-full border-gray-500 border-[1px] rounded-[20px] px-4 mb-4"
+        placeholder="Tìm kiếm"
         value={searchText}
-        onChangeText={(text) => setSearchText(text)}
+        onChangeText={(text) => {
+          setSearchText(text)
+        }}
       />
-      <Button title="Search" onPress={handleSearch} />
-      <FlatList
+      <Button
+        style={{ backgroundColor: '#FA8035' }}
+        className="w-[130px]"
+        onPress={handleSearch}
+        mode="contained"
+      >
+        Tìm kiếm
+      </Button>
+      {/* <FlatList
         data={searchResults}
         renderItem={({ item }) => <Text>{item}</Text>}
         keyExtractor={(item, index) => index.toString()}
-      />
-      <StoryFilterBox />
+      /> */}
+      {/* <StoryFilterBox /> */}
     </View>
   )
 }

@@ -4,7 +4,7 @@ import { getTokenLS, setTokenLS } from './authLS'
 import { sendEvent } from './event'
 import { Toast } from 'toastify-react-native'
 
-const BASE_URL = 'https://8c29-115-76-55-81.ngrok-free.app/v1'
+const BASE_URL = 'http://222.255.117.238:8082/v1'
 
 const http = axios.create({
   baseURL: BASE_URL,
@@ -28,7 +28,7 @@ http.interceptors.response.use(
   },
   async (error) => {
     if (axios.isAxiosError(error)) {
-      if (error.request.responseURL.includes('auth/refresh')) {
+      if (error.request.responseURL?.includes('auth/refresh')) {
         sendEvent('auth:redirectLogin', null)
         Toast.error(error.response?.data.message, 'top')
         return Promise.reject(error)

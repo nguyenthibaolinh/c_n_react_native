@@ -42,7 +42,7 @@ const HomeScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
       page: 1,
       categoryIn: '',
       categoryNotIn: '',
-      isFull: null,
+      isFull: undefined,
       key: '',
     }
     dispatch(updateStoryFilter(storyFilterNew))
@@ -51,30 +51,32 @@ const HomeScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
   }
 
   return (
-    <View className="flex-1 ">
-      <View className="h-[12%] w-[100%] flex-row justify-end items-end p-3 gap-2 bg-white">
+    <View className="flex-1 bg-white">
+      <View className="h-[8.5%] w-[100%] flex-row justify-end p-3 gap-2 mt-8">
         <TouchableOpacity
           onPress={() => navigation.navigate('FilterCategories')}
         >
           <ListFilter className="" color="black" size={30} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('FilterCategories')}
+        >
           <Search color="black" size={30} />
         </TouchableOpacity>
       </View>
-      <View className="flex-row">
+      <View className="flex-row mb-3">
         {Object.keys(STORY_TYPE).map((storyTypeKey) => {
           const isSelected =
             STORY_TYPE[storyTypeKey as StoryTypeKey] === storyFilter.type
           return (
             <View
-              className="w-[50%] h-[40px] justify-center items-center border border-orange-400"
+              className="w-[50%] h-[40px] justify-center items-center border border-orange-500"
               style={{
-                backgroundColor: isSelected ? '#FFA500' : '#FFCC99',
+                backgroundColor: isSelected ? '#FA8035' : '#FFCC99',
               }}
+              key={storyTypeKey}
             >
               <TouchableOpacity
-                key={storyTypeKey}
                 onPress={() =>
                   handleChangeStoryType(storyTypeKey as StoryTypeKey)
                 }

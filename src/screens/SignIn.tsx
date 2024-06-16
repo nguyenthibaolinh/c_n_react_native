@@ -42,6 +42,8 @@ const SignInScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
     }
   }, [auth])
   const onSubmit = async (data: IFormInput) => {
+    console.log('đăng nhập')
+
     try {
       const res = await mutation.mutateAsync({
         email: data.email,
@@ -50,6 +52,7 @@ const SignInScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
 
       const responseData: AuthResponse = res.data
       const { accessToken, ...authRes } = responseData
+      console.log(responseData)
 
       dispatch(
         updateAuth({
@@ -89,9 +92,9 @@ const SignInScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
         <View className="flex-1 items-center mt-auto mb-auto">
           <Image
             source={require('../image/logozz.png')}
-            className="w-[70%] h-[100px] mt-[70px] mb-[40px]"
+            className="w-[70%] h-[100px] mt-[70px] mb-[60px]"
           />
-          <TouchableOpacity onPress={handleGoogleSignIn}>
+          {/* <TouchableOpacity onPress={handleGoogleSignIn}>
             <View className="flex-row justify-stretch mb-3 w-[80%] ">
               <Image
                 source={{
@@ -107,7 +110,7 @@ const SignInScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
             <View className="flex-1 h-[1px] bg-gray-400 mb-5" />
             <Text className="mx-4 text-lg font-bold mb-5">Or</Text>
             <View className="flex-1 h-[1px] bg-gray-400 mb-5" />
-          </View>
+          </View> */}
 
           <Controller
             control={control}
@@ -152,13 +155,14 @@ const SignInScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
               </>
             )}
           />
-          <View className="mb-4 w-[80%]">
+          {/* <View className="w-[80%]">
             <TouchableOpacity onPress={() => console.log('Forgot Password?')}>
               <Text className="text-right">Forgot Password?</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
           <Button
-            className="bg-[#4299E1]"
+            className="mt-5"
+            style={{ backgroundColor: '#FA8035' }}
             mode="contained"
             onPress={handleSubmit(onSubmit)}
           >

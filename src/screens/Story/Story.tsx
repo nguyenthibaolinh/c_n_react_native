@@ -54,7 +54,6 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
   const story: Story = storyResponse?.data
 
   //---------------refresh---------------
-
   const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
@@ -65,13 +64,10 @@ const StoryScreen: React.FunctionComponent<IStoryProps> = ({
     return unsubscribe
   }, [navigation, refetch])
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = () => {
     setRefreshing(true)
-    // Thực hiện các thao tác cần thiết để làm mới dữ liệu
-    refetch()
-      .then(() => setRefreshing(false))
-      .catch(() => setRefreshing(false))
-  }, [refetch])
+    setRefreshing(false)
+  }
 
   //---------------------like and follow------
   const { data: likeStoryResponse } = useQuery({

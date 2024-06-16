@@ -1,15 +1,9 @@
-import { StatusBar } from 'expo-status-bar'
 import React, { useEffect, useState } from 'react'
 import {
-  Button,
+  ActivityIndicator,
   FlatList,
-  Image,
   RefreshControl,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native'
 import StoryItem from './StoryItem'
@@ -18,9 +12,7 @@ import {
   selectStoryFilter,
   updateStoryFilter,
 } from '@/features/stories/storyFilterSlide'
-import useFilterStory from '@/hooks/useFilterStory'
 import { StoriesPaginate, StoriesResponse } from '@/types/storyType'
-import { useGetStoryQuery } from '@/hooks/useGetStoryQuery'
 import StoryServices, { StoryKey } from '@/services/storyServices'
 import { useQuery } from '@tanstack/react-query'
 
@@ -35,11 +27,9 @@ const StoriesList: React.FunctionComponent<IStoriesListProps> = (props) => {
 
   const {
     data: response,
-    isLoading,
-    isPending,
     isSuccess,
-    isError,
-    error,
+    isPending,
+    isFetching,
     refetch,
   } = useQuery({
     queryKey: [StoryKey, storyFilter],
@@ -48,25 +38,11 @@ const StoriesList: React.FunctionComponent<IStoriesListProps> = (props) => {
     },
   })
 
-  console.log(storyFilter)
-
   const storiesPaginate: StoriesPaginate = response?.data
 
-  console.log(storiesPaginate?.total)
-
   //---------------refresh---------------
-
   const [refreshing, setRefreshing] = useState(false)
   const [storiesList, setStoriesList] = useState<StoriesResponse[]>([])
-
-  useEffect(() => {
-    if (isSuccess && storiesPaginate.curPage == 1) {
-      setStoriesList([...storiesPaginate.data])
-    }
-    if (isSuccess && storiesPaginate.curPage != 1) {
-      setStoriesList([...storiesList, ...storiesPaginate.data])
-    }
-  }, [storiesPaginate])
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -78,16 +54,30 @@ const StoriesList: React.FunctionComponent<IStoriesListProps> = (props) => {
 
   const onRefresh = () => {
     setRefreshing(true)
-    // Thực hiện các thao tác cần thiết để làm mới dữ liệu
-    // refetch()
-    //   .then(() => setRefreshing(false))
-    //   .catch(() => setRefreshing(false))
     dispatch(updateStoryFilter({ page: 1 }))
     setRefreshing(false)
   }
 
+  useEffect(() => {
+    console.log('load ')
+
+    if (isSuccess && storiesPaginate.curPage == 1) {
+      setStoriesList([...storiesPaginate.data])
+    }
+    if (isSuccess && storiesPaginate.curPage != 1) {
+      setStoriesList([...storiesList, ...storiesPaginate.data])
+    }
+  }, [storiesPaginate])
+
+  useEffect(() => {
+    console.log('update ', storyFilter)
+  }, [storyFilter])
+
   return (
     <View className="flex-1">
+      {(isPending || isFetching) && !isSuccess && (
+        <ActivityIndicator size="large" color="#0000ff" />
+      )}
       {isSuccess && (
         <FlatList
           data={storiesList}

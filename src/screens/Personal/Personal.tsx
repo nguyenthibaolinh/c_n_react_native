@@ -31,8 +31,12 @@ const PersonalScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
   }
 
   return (
-    <View className="flex-1 items-center justify-center">
-      <Button className="bg-[#4299E1]" mode="contained" onPress={handleSignIn}>
+    <View className="flex-1 items-center justify-center bg-white">
+      <Button
+        style={{ backgroundColor: '#FA8035' }}
+        mode="contained"
+        onPress={handleSignIn}
+      >
         ĐĂNG XUẤT
       </Button>
     </View>
