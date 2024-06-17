@@ -34,7 +34,6 @@ const HomeScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
   const { navigation } = props
   const storyFilter = useAppSelector(selectStoryFilter)
   const dispatch = useAppDispatch()
-  // const filterStoryNavigate = useFilterStory()
 
   const handleChangeStoryType = (storyTypeKey: StoryTypeKey) => {
     const storyFilterNew: StoriesQuery = {
@@ -46,13 +45,11 @@ const HomeScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
       key: '',
     }
     dispatch(updateStoryFilter(storyFilterNew))
-
-    // filterStoryNavigate(storyFilterNew)
   }
 
   return (
     <View className="flex-1 bg-white">
-      <View className="h-[8.5%] w-[100%] flex-row justify-end p-3 gap-2 mt-8">
+      <View className="h-[8.5%] w-[100%] flex-row justify-end p-3 gap-2">
         <TouchableOpacity
           onPress={() => navigation.navigate('FilterCategories')}
         >

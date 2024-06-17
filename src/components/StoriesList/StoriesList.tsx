@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-  ActivityIndicator,
-  FlatList,
-  RefreshControl,
-  Text,
-  View,
-} from 'react-native'
+import { ActivityIndicator, FlatList, RefreshControl, View } from 'react-native'
 import StoryItem from './StoryItem'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import {
@@ -15,15 +9,13 @@ import {
 import { StoriesPaginate, StoriesResponse } from '@/types/storyType'
 import StoryServices, { StoryKey } from '@/services/storyServices'
 import { useQuery } from '@tanstack/react-query'
+import { IStackScreenProps } from '@/library/StackScreenProps'
 
-interface IStoriesListProps {
-  navigation: any
-}
-
-const StoriesList: React.FunctionComponent<IStoriesListProps> = (props) => {
+const StoriesList: React.FunctionComponent<IStackScreenProps> = ({
+  navigation,
+}) => {
   const storyFilter = useAppSelector(selectStoryFilter)
   const dispatch = useAppDispatch()
-  const { navigation } = props
 
   const {
     data: response,

@@ -43,11 +43,6 @@ const MainNavigator = () => {
         component={ChapterScreen}
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen
-        name="AuthNavigator"
-        component={AuthNavigator}
-        options={{ headerShown: false }}
-      /> */}
     </Stack.Navigator>
   )
 }

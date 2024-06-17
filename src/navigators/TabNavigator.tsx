@@ -4,13 +4,13 @@ import PersonalScreen from '@/screens/Personal/Personal'
 import SignInScreen from '@/screens/SignIn'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Bell, LucideHome, UserRound } from 'lucide-react-native'
+import { Bell, Heart, LucideHome, UserRound } from 'lucide-react-native'
 
 const TabNavigator = () => {
   const Tab = createBottomTabNavigator()
 
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator>
       <Tab.Screen
         name="Home"
         component={Home}
@@ -18,13 +18,16 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <LucideHome color={color} size={size} />
           ),
+          title: 'Trang chủ',
+          headerShown: false,
         }}
       />
       <Tab.Screen
         name="Notify"
-        component={PersonalScreen}
+        component={NotifyScreen}
         options={{
-          tabBarIcon: ({ color, size }) => <Bell color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => <Heart color={color} size={size} />,
+          title: 'Truyện theo dõi',
         }}
       />
       <Tab.Screen
@@ -34,6 +37,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <UserRound color={color} size={size} />
           ),
+          title: 'Trang cá nhân',
         }}
       />
     </Tab.Navigator>
